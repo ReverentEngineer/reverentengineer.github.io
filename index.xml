@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reverent engineer</title>
+    <link>https://reverentengineer.com/</link>
+    <description>Recent content on reverent engineer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 04 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://reverentengineer.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Testing with Boost.Test</title>
+      <link>https://reverentengineer.com/posts/boost-test/</link>
+      <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://reverentengineer.com/posts/boost-test/</guid>
+      <description>
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;what-is-it&#34;&gt;What Is It?&lt;/h1&gt;
+
+&lt;p&gt;Boost.Test is a C++ header-only library for easily creating unit tests and
+providing developers with some of the common testing components. It&amp;rsquo;s part of
+the &lt;a href=&#34;https://www.boost.org/doc/libs&#34;&gt;Boost&lt;/a&gt; collection of libraries that are
+free and open source.&lt;/p&gt;
+
+&lt;h1 id=&#34;how-do-i-set-it-up&#34;&gt;How Do I Set It Up?&lt;/h1&gt;
+
+&lt;p&gt;In the simple case, it&amp;rsquo;s as easy as installing the Boost development headers
+from your package manages (e.g. &lt;code&gt;yum install boost-devel&lt;/code&gt;) and then the headers
+should be accessible in the default system paths. If you don&amp;rsquo;t have admin
+privileges, then you might have to do some more work including installng
+to your home directory.&lt;/p&gt;
+
+&lt;h1 id=&#34;execution-paradigms&#34;&gt;Execution Paradigms&lt;/h1&gt;
+
+&lt;p&gt;There are two sets of execution paradigms for creating the test runner.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Each test or test-suite can be separated into it&amp;rsquo;s own executable test
+runner. This fits in nicely with CMake&amp;rsquo;s CTest framework.&lt;/li&gt;
+&lt;li&gt;All tests can be dynamically linked and a test runner can be created that
+will find all the tests and run them.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The type of setup is defined at the top of the file by macros. A stand-alone test
+is defined by:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;#define BOOST_TEST_MODULE Thing I Want To Test
+#include &amp;lt;boost/test/included/unit_test.hpp&amp;gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;While a dynamically linked is defined as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE Thing I Want To Test
+#include &amp;lt;boost/test/included/unit_test.hpp&amp;gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;NOTE: The order of the defines don&amp;rsquo;t matter, but they should be before you
+include &lt;code&gt;boost/test/included/unit_test.hpp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;writing-basic-tests&#34;&gt;Writing Basic Tests&lt;/h1&gt;
+
+&lt;p&gt;Following the boost headers and any headers you need for your tests, you will
+define all your tests in the form:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;BOOST_AUTO_TEST_CASE(test_thing_one)
+{
+  ... &amp;lt; test code &amp;gt;
+}
+
+BOOST_AUTO_TEST_CASE(test_thing_two)
+{
+  ... &amp;lt; test code &amp;gt;
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Inside each test case, you can use &lt;code&gt;BOOST_TEST&lt;/code&gt; for boolean checks or any
+number of &lt;a href=&#34;https://www.boost.org/doc/libs/1_73_0/libs/test/doc/html/boost_test/utf_reference/testing_tool_ref.html&#34;&gt;provided macros&lt;/a&gt;.
+You can even provide levels such as &lt;code&gt;BOOST_WARN&lt;/code&gt; (warn about a problem but
+don&amp;rsquo;t fail), &lt;code&gt;BOOST CHECK&lt;/code&gt; (fail but continue the test), and &lt;code&gt;BOOST_REQUIRE&lt;/code&gt;
+(fail and stop the test).&lt;/p&gt;
+
+&lt;p&gt;A simple example would be:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;BOOST_AUTO_TEST_CASE(test_thing_one)
+{
+  int x = 1;
+  int y = 1;
+  int z = x + y;
+  BOOST_TEST(2)
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;adding-fixtures&#34;&gt;Adding Fixtures&lt;/h1&gt;
+
+&lt;p&gt;Sometimes when writing unit tests, it&amp;rsquo;s necessary to run similar routines
+to prepare or teardown states in multiple tests. This is where fixtures can
+be useful.&lt;/p&gt;
+
+&lt;p&gt;The following is a simple example of a fixture although, admittedly, not the
+best use case for one:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;struct myfixture {
+  myfixture() {
+    // setup code
+    myfixturevar = 1;
+  }
+
+  ~myfixture() {
+    // teardown code
+  }
+
+  int myfixturevar;
+}
+
+BOOST_FIXTURE_TEST_CASE(my_fixture_test, myfixture) {
+  int mytestvar = 1;
+  BOOST_TEST(mytestvar == myfixturevar)
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;I hope this small tutorial helps you with your unit testing endeavors.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Portfolio</title>
+      <link>https://reverentengineer.com/portfolio/</link>
+      <pubDate>Tue, 14 May 2019 19:37:23 -0400</pubDate>
+      
+      <guid>https://reverentengineer.com/portfolio/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://reverentengineer.com/git-code-review&#34;&gt;git-code-review&lt;/a&gt; - A python module for performing code reviews inside git history&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://reverentengineer.com/minimalist-map&#34;&gt;minimalist-map&lt;/a&gt; - A simple, minimalist map implementation in C&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/cron-build&#34;&gt;cron-build&lt;/a&gt; - A perl script to support cron-based build automation of git repositories&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/digitalocean-ansible-inventory&#34;&gt;digitalocean-ansible-inventory&lt;/a&gt; - An Ansible dynamic inventory for DigitalOcean droplets&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/perl-DKIM-Sign&#34;&gt;perl-DKIM-Sign&lt;/a&gt; - A mail signing CLI tool useful for Postfix&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/event-photo-gallery&#34;&gt;event-photo-gallery&lt;/a&gt; - A collaborative, micro photo gallery&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://reverentengineer.com/build-dashboard&#34;&gt;build-dashboard&lt;/a&gt; - A text-based app for interfacing with &lt;a href=&#34;https://github.com/buildbot/buildbot&#34;&gt;Buildbot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/clang_complete-cmake.vim&#34;&gt;clang_complete-cmake.vim&lt;/a&gt; - A plugin for &lt;a href=&#34;https://github.com/Rip-Rip/clang_complete&#34;&gt;clang_complete&lt;/a&gt; that finds sources using the CMake server.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/netrw-sidebar.vim&#34;&gt;netrw-sidebar.vim&lt;/a&gt; - A basic netrw sidebar plugin&lt;/li&gt;
+&lt;li&gt;A number of Docker images:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/docker-postfix&#34;&gt;reverentengineer/postfix&lt;/a&gt; - Postfix with LDAP&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/docker-dovecot&#34;&gt;reverentengineer/dovecot&lt;/a&gt; - Dovecot with LDAP&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/docker-rspamd&#34;&gt;reverentengineer/rspamd&lt;/a&gt; - Rspamd with Redis&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/docker-radicale&#34;&gt;reverentengineer/radicale&lt;/a&gt;  - Radicale for Reverse Proxy&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ReverentEngineer/docker-nginx-ldap-interface&#34;&gt;reverentengineer/nginx-ldap-interface&lt;/a&gt; - Flask app to proxy nginx auth requests to LDAP server&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
