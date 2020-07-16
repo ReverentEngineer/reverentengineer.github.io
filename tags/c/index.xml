@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>c&#43;&#43; on reverent engineer</title>
-    <link>https://reverentengineer.com/tags/c&#43;&#43;/</link>
-    <description>Recent content in c&#43;&#43; on reverent engineer</description>
+    <title>c on reverent engineer</title>
+    <link>https://reverentengineer.com/tags/c/</link>
+    <description>Recent content in c on reverent engineer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 04 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://reverentengineer.com/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://reverentengineer.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,16 +18,6 @@
       
       <guid>https://reverentengineer.com/posts/cmake-guide/</guid>
       <description>Introduction According to CMake&amp;rsquo;s own site, &amp;ldquo;CMake is an open-source, cross-platform family of tools designed to build, test and package software.&amp;rdquo; What does that mean for a developer? It means that you can write a platform agnostic description of what should happen at build time and should (hopefully) not have to fret about it not working when you switch from your Linux machine to your Mac or from your Mac to your Windows machine or even just a Linux machine to a Linux machine with libraries installed in different places.</description>
-    </item>
-    
-    <item>
-      <title>Testing with Boost.Test</title>
-      <link>https://reverentengineer.com/posts/boost-test/</link>
-      <pubDate>Mon, 04 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://reverentengineer.com/posts/boost-test/</guid>
-      <description>What Is It? Boost.Test is a C++ header-only library for easily creating unit tests and providing developers with some of the common testing components. It&amp;rsquo;s part of the Boost collection of libraries that are free and open source.
-How Do I Set It Up? In the simple case, it&amp;rsquo;s as easy as installing the Boost development headers from your package manager (e.g. yum install boost-devel) and then the headers should be accessible in the default system paths.</description>
     </item>
     
   </channel>

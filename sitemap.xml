@@ -3,12 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://reverentengineer.com/posts/cmake-guide/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://reverentengineer.com/tags/boost/</loc>
     <lastmod>2020-05-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://reverentengineer.com/tags/builds/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://reverentengineer.com/tags/c/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://reverentengineer.com/tags/c&#43;&#43;/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://reverentengineer.com/tags/cmake/</loc>
     <lastmod>2020-05-04T00:00:00+00:00</lastmod>
   </url>
   
